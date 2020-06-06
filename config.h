@@ -1,23 +1,23 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel size of windows */
+static const unsigned int borderpx  = 0;        /* border pixel size of windows */
 static const unsigned int gappx     = 5;        /* gaps size between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12", "fontawesome:size=12" };
-static const char dmenufont[]       = "monospace:size=11";
+static const char *fonts[]          = { "monospace:size=12", "ttf-mplus:size=12" };
+static const char dmenufont[]       = "monospace:size=8";
 //background color
 static const char col_gray1[]       = "#222222";
 //inactive window border color
 static const char col_gray2[]       = "#444444";
 //font color
-static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray3[]       = "#D08770";
 //current tag and current window font color
-static const char col_gray4[]       = "#eeeeee";
+static const char col_gray4[]       = "#88C0D0";
 //Top bar second color (blue) and active window border color
-static const char col_cyan[]        = "#ffae00";
+static const char col_cyan[]        = "#2E3440";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 //tag names (upper left)
-static const char *tags[] = { "", "", "3", "4", "5", "6", "7", "8", "" };
+static const char *tags[] = { "    一    ", "    二    ", "    三    ", "    四    ", "    五    ", "    六    ", "    七    ", "    八    ", "    九    " };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -68,14 +68,26 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 //launches htop
 static const char *monitor[] = { "/usr/bin/htop", NULL };
 //sets st as the default terminal
-//static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", NULL };
 //sets urxvt as the default terminal
-static const char *termcmd[]  = { "urxvt", NULL };
+//static const char *termcmd[]  = { "urxvt", NULL };
 
 #include "shiftview.c"
 static char *endx[] = { "/bin/sh", "-c", "endx", "externalpipe", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+
+	/* Luke's Keybinding */
+	{ MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
+	{ MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
+	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
+	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
+/*	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 15") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") },
+*/
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_t,      togglebar,      {0} },
@@ -132,4 +144,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
