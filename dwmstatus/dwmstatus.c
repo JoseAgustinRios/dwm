@@ -196,16 +196,15 @@ main(void)
 		avgs = loadavg();
 		bat = getbattery("/sys/class/power_supply/BAT0");
 		bat1 = getbattery("/sys/class/power_supply/BAT1");
-		tmar = mktimes("%H:%M", tzargentina);
-		tmutc = mktimes("%H:%M", tzutc);
+		tmar = mktimes(" 「 %H ー %M 」", tzargentina);
+		tmutc = mktimes("「 %H ー %M 」", tzutc);
 		tmbln = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzberlin);
 		t0 = gettemperature("/sys/devices/virtual/hwmon/hwmon0", "temp1_input");
 		t1 = gettemperature("/sys/devices/virtual/hwmon/hwmon2", "temp1_input");
 		t2 = gettemperature("/sys/devices/virtual/hwmon/hwmon4", "temp1_input");
 
-		status = smprintf("T:%s|%s|%s L:%s B:%s|%s A:%s U:%s %s",
-				t0, t1, t2, avgs, bat, bat1, tmar, tmutc,
-				tmbln);
+		status = smprintf("%s",
+				tmar);
 		setstatus(status);
 
 		free(t0);
@@ -224,4 +223,3 @@ main(void)
 
 	return 0;
 }
-
